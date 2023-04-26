@@ -1,0 +1,103 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Cadastro Dependentes</title>
+</head>
+
+<body>
+<div th:include="fragmentos::topo"></div>
+
+<!--
+<form method="post" th:action="@{/categorias/salvar}" th:object="${categorias}">
+    <div class="container">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Código</label>
+            <input readonly th:field="*{id}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Descrição</label>
+            <input th:field="*{descricao}" type="text" class="form-control" id="exampleInputPassword1" placeholder="Descrição" required="required">
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+</form>
+
+
+<div th:if="${retorno} !=null" class="row">
+    <span th:if="${retorno}" class="alert alert-success" th:text="${mensagem}"></span>
+    <span th:if="!${retorno}" class="alert alert-danger" th:text="${mensagem}"></span>
+</div>
+
+
+</div>
+
+-->
+
+
+
+<div th:include="fragmentos::rodape"></div>
+
+<!-- JavaScript (Opcional) -->
+<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+        <script>
+            $(document).ready(function(){
+                getClientes("Pedro");
+                salvarCliente();
+            });
+
+            function getClientes(nome){
+                $.get("http://localhost:8080/dependentes/getClientes/"+ nome , function(resultado){
+                    console.log(resultado);
+                });
+            }
+
+            function salvarCliente(){
+                    var model = {
+                      "id":7,
+                      "nome":"Juao",
+                      "data_nascimento":"1996-07-06",
+                      "rua":"Matias Sarai",
+                      "numero":568,
+                      "bairro":"Vicente São",
+                      "cidade":"Presidente Machado",
+                      "telefone":"18981179783",
+                      "cpf":"235656565",
+                    };
+                        $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8080/dependentes/salvarCliente",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(model) ,
+                        dataType: "json",
+                        success: function (jsonResult) {
+                        console.log(jsonResult);
+                        },
+                        failure: function (response) {
+                        alert("Erro ao carregar os dados: " + response);
+                        }
+                    });
+            }
+        </script>
+
+
+</body>
+
+
+
+
+</html>
